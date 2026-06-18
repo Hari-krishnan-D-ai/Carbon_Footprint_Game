@@ -1,0 +1,172 @@
+/* ===== FLOATING NLP — Clash of Clans Style Control Deck ===== */
+
+.cc-nlp {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  animation: cc-rise 0.5s ease-out 0.2s both;
+  pointer-events: none;
+}
+
+.cc-nlp * {
+  pointer-events: auto;
+}
+
+.cc-nlp__panel {
+  width: min(580px, 92vw);
+  background: linear-gradient(to bottom, #4d2f16 0%, #2b1708 100%);
+  border: 4px solid #dfab29;
+  border-radius: 12px;
+  box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.2),
+              inset 0 -4px 0 rgba(0, 0, 0, 0.6),
+              0 8px 16px rgba(0, 0, 0, 0.7);
+  padding: 14px 18px;
+  transition: transform 0.2s ease;
+}
+
+/* Flash feedback */
+.cc-nlp--flash-positive .cc-nlp__panel {
+  animation: cc-flash-green 0.6s ease-out;
+}
+
+.cc-nlp--flash-negative .cc-nlp__panel {
+  animation: cc-flash-red 0.6s ease-out;
+}
+
+/* ---- Header ---- */
+.cc-nlp__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.cc-nlp__icon {
+  font-size: 16px;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.6));
+}
+
+.cc-nlp__eyebrow {
+  font-family: var(--cc-font-heading);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffeb3b;
+  text-shadow: 1.5px 1.5px 0px #000;
+}
+
+/* ---- Input Row ---- */
+.cc-nlp__input-row {
+  display: flex;
+  gap: 12px;
+}
+
+.cc-nlp__input-wrap {
+  flex: 1;
+  position: relative;
+}
+
+.cc-nlp__input {
+  width: 100%;
+  padding: 11px 14px;
+  font-family: var(--cc-font-body);
+  font-size: 14px;
+  font-weight: 600;
+  border: 3px solid #201308;
+  border-radius: 8px;
+  background: #fdf5e6; /* Parchment/cream paper background for CoC contrast */
+  color: #3b2111; /* Dark brown ink text */
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+  transition: border-color 0.2s ease;
+}
+
+.cc-nlp__input:focus {
+  outline: none;
+  border-color: #dfab29;
+}
+
+.cc-nlp__input::placeholder {
+  color: #8a7a6b;
+  font-style: italic;
+  transition: opacity 0.3s ease;
+}
+
+.cc-nlp__input--hint-fading::placeholder {
+  opacity: 0;
+}
+
+.cc-nlp__input:disabled {
+  opacity: 0.6;
+  background: #dcd4c5;
+}
+
+/* Spinner inside input */
+.cc-nlp__spinner {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  border: 3.5px solid rgba(223, 171, 41, 0.2);
+  border-top-color: #dfab29;
+  border-radius: 50%;
+  animation: cc-spin 0.7s linear infinite;
+}
+
+/* ---- CoC Style 3D Action Button ---- */
+.cc-nlp__submit {
+  font-family: var(--cc-font-heading);
+  font-weight: 900;
+  font-size: 14px;
+  text-transform: uppercase;
+  padding: 0 24px;
+  border: 2px solid #183e05;
+  border-bottom: 5px solid #143204;
+  border-radius: 8px;
+  background: linear-gradient(to bottom, #7bed9f 0%, #2ed573 100%);
+  color: #ffffff;
+  text-shadow: 1.5px 1.5px 0px #000;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.1s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.4);
+}
+
+.cc-nlp__submit:not(:disabled):hover {
+  background: linear-gradient(to bottom, #8cffa9 0%, #30e07c 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 8px rgba(0,0,0,0.5);
+}
+
+.cc-nlp__submit:not(:disabled):active {
+  transform: translateY(2px);
+  border-bottom-width: 2px;
+  box-shadow: 0 2px 3px rgba(0,0,0,0.4);
+}
+
+.cc-nlp__submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #4a5a4a;
+  border-color: #2a3a2a;
+  border-bottom-width: 3px;
+  box-shadow: none;
+}
+
+.cc-nlp__submit-processing {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cc-nlp__pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffffff;
+  animation: cc-pulse 1s ease-in-out infinite;
+}

@@ -1,0 +1,194 @@
+/*
+  Design System v2 — "Dark Glassmorphism + Living Village"
+  
+  The village speaks through warm amber glows and emerald health.
+  The threat pulses in ember reds. All panels float on dark glass
+  with backdrop-blur and subtle luminance borders.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=IBM+Plex+Mono:wght@500&family=Inter:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* -- core palette -- */
+  --cc-ink: #1b1a17;
+  --cc-parchment: #e8dcc4;
+  --cc-parchment-dim: #d8c9a8;
+  --cc-moss: #4ade80;
+  --cc-moss-bright: #22c55e;
+  --cc-moss-dim: #166534;
+  --cc-ember: #ef4444;
+  --cc-ember-bright: #f87171;
+  --cc-ember-dim: #991b1b;
+  --cc-smog: #6b7553;
+  --cc-gold: #fbbf24;
+  --cc-gold-dim: #b45309;
+  --cc-amber: #f59e0b;
+  --cc-sky-clear: #bfe3e0;
+  --cc-sky-fouled: #5b5a4d;
+
+  /* -- glassmorphism -- */
+  --cc-glass-bg: rgba(10, 12, 18, 0.72);
+  --cc-glass-bg-hover: rgba(10, 12, 18, 0.82);
+  --cc-glass-border: rgba(255, 255, 255, 0.08);
+  --cc-glass-border-hover: rgba(255, 255, 255, 0.14);
+  --cc-glass-blur: 16px;
+  --cc-glass-glow: 0 0 30px rgba(74, 222, 128, 0.08);
+  --cc-glass-glow-ember: 0 0 30px rgba(239, 68, 68, 0.12);
+
+  /* -- type -- */
+  --cc-font-display: 'Cinzel', 'Iowan Old Style', serif;
+  --cc-font-heading: 'Outfit', system-ui, sans-serif;
+  --cc-font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --cc-font-mono: 'IBM Plex Mono', 'SFMono-Regular', monospace;
+
+  /* -- layout -- */
+  --cc-radius: 12px;
+  --cc-radius-sm: 8px;
+  --cc-radius-xs: 4px;
+  --cc-shadow-panel: 0 8px 32px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
+  --cc-shadow-glow: 0 0 20px rgba(74, 222, 128, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--cc-font-body);
+  color: #e2e8f0;
+  background: #0a0c12;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  font-family: inherit;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--cc-gold);
+  outline-offset: 2px;
+}
+
+/* ===== ANIMATION KEYFRAMES ===== */
+
+@keyframes cc-breathe {
+  0%, 100% { transform: scaleY(1) translateY(0); }
+  50% { transform: scaleY(1.02) translateY(-2px); }
+}
+
+@keyframes cc-bounce-in {
+  0% { opacity: 0; transform: translateY(40px) scale(0.9); }
+  60% { opacity: 1; transform: translateY(-8px) scale(1.02); }
+  80% { transform: translateY(3px) scale(0.99); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+@keyframes cc-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes cc-shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes cc-typing-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes cc-shake {
+  0%, 100% { transform: translateX(0); }
+  10% { transform: translateX(-4px); }
+  30% { transform: translateX(4px); }
+  50% { transform: translateX(-3px); }
+  70% { transform: translateX(3px); }
+  90% { transform: translateX(-1px); }
+}
+
+@keyframes cc-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes cc-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cc-slide-in {
+  from { opacity: 0; transform: translate(24px, -50%); }
+  to { opacity: 1; transform: translate(0, -50%); }
+}
+
+@keyframes cc-glow-pulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(74, 222, 128, 0.2); }
+  50% { box-shadow: 0 0 20px rgba(74, 222, 128, 0.4); }
+}
+
+@keyframes cc-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes cc-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes cc-pulse-ring {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+@keyframes cc-flash-green {
+  0% { background: rgba(74, 222, 128, 0.3); }
+  100% { background: transparent; }
+}
+
+@keyframes cc-flash-red {
+  0% { background: rgba(239, 68, 68, 0.3); }
+  100% { background: transparent; }
+}
+
+@keyframes cc-celebrate {
+  0% { transform: translateY(0) scale(1); }
+  25% { transform: translateY(-8px) scale(1.05); }
+  50% { transform: translateY(0) scale(1); }
+  75% { transform: translateY(-4px) scale(1.02); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+@keyframes cc-worried-shake {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  20% { transform: translateX(-3px) rotate(-1deg); }
+  40% { transform: translateX(3px) rotate(1deg); }
+  60% { transform: translateX(-2px) rotate(-0.5deg); }
+  80% { transform: translateX(2px) rotate(0.5deg); }
+}
+
+@keyframes cc-number-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
