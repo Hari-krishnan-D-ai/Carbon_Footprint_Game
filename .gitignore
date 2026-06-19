@@ -27,3 +27,7 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 Thumbs.db
+.agents/skills/Code-review/SKILL.md
+.agents/
+progress.md
+PROJECT.md

@@ -10,6 +10,33 @@ const FALLBACK_RESPONSE = {
   remedy: 'Network anomaly. Keep defending the village!',
 };
 
+const GENERATION_CONFIG = {
+  responseMimeType: 'application/json',
+  responseSchema: {
+    type: 'object',
+    properties: {
+      impactScore: {
+        type: 'integer',
+        description: 'integer from -25 to 25 representing the sustainability impact',
+      },
+      category: {
+        type: 'string',
+        description: 'the category of action: travel, energy, diet, waste, or general',
+      },
+      remedy: {
+        type: 'string',
+        description: 'one short, encouraging remedy suggestion under 15 words written in the persona of an urgent Barbarian guard',
+      },
+    },
+    required: ['impactScore', 'category', 'remedy'],
+  },
+  maxOutputTokens: 500,
+  temperature: 0.2,
+  thinkingConfig: {
+    thinkingBudget: 0,
+  },
+};
+
 const clampScore = (value) => Math.max(-25, Math.min(25, Math.round(Number(value) || 0)));
 
 export default async function handler(req, res) {
@@ -49,32 +76,7 @@ export default async function handler(req, res) {
           systemInstruction: {
             parts: [{ text: SYSTEM_PROMPT }],
           },
-          generationConfig: {
-            responseMimeType: 'application/json',
-            responseSchema: {
-              type: 'object',
-              properties: {
-                impactScore: {
-                  type: 'integer',
-                  description: 'integer from -25 to 25 representing the sustainability impact',
-                },
-                category: {
-                  type: 'string',
-                  description: 'the category of action: travel, energy, diet, waste, or general',
-                },
-                remedy: {
-                  type: 'string',
-                  description: 'one short, encouraging remedy suggestion under 15 words written in the persona of an urgent Barbarian guard',
-                },
-              },
-              required: ['impactScore', 'category', 'remedy'],
-            },
-            maxOutputTokens: 500,
-            temperature: 0.2,
-            thinkingConfig: {
-              thinkingBudget: 0,
-            },
-          },
+          generationConfig: GENERATION_CONFIG,
         }),
       }
     );

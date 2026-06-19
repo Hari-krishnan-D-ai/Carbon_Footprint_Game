@@ -31,7 +31,7 @@ function SarahAvatar({ mood }) {
 
   return (
     <svg
-      className={`cc-sarah__avatar cc-sarah__avatar--${mood}`}
+      className={`cc-sarah__avatar cc-sarah__avatar--${mood} npc-avatar`}
       viewBox="0 0 80 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -138,13 +138,22 @@ function SarahGuide() {
   const sarahMood = useGameStore((state) => state.sarahMood);
   const lastImpact = useGameStore((state) => state.lastImpact);
   const townHallHealth = useGameStore((state) => state.townHallHealth);
+  const [showBubble, setShowBubble] = useState(false);
   const [showText, setShowText] = useState(false);
 
-  // Typing reveal effect
+  // Introduce showBubble state in SarahGuide with a 1000ms delay.
   useEffect(() => {
-    const timer = setTimeout(() => setShowText(true), 400);
+    const timer = setTimeout(() => setShowBubble(true), 1000);
     return () => clearTimeout(timer);
   }, []);
+
+  // Set the showText typing reveal effect to trigger 400ms after showBubble is true.
+  useEffect(() => {
+    if (showBubble) {
+      const timer = setTimeout(() => setShowText(true), 400);
+      return () => clearTimeout(timer);
+    }
+  }, [showBubble]);
 
   // Dynamic message based on mood/state
   const getMessage = () => {
@@ -170,12 +179,18 @@ function SarahGuide() {
       <div className="cc-sarah__container">
         {/* Sarah's avatar */}
         <div className="cc-sarah__avatar-wrap">
+          <div className="cc-spotlight-glow spotlight-glow" />
           <SarahAvatar mood={displayMood} />
           <div className="cc-sarah__name-tag">Sarah</div>
         </div>
 
         {/* Speech bubble */}
-        <div className="cc-sarah__bubble">
+        <div
+          id="npc-dialogue"
+          className={`cc-sarah__bubble speech-bubble ${
+            showBubble ? 'cc-sarah__bubble--visible speech-bubble--visible' : ''
+          }`}
+        >
           <div className="cc-sarah__bubble-arrow" />
           <p className={`cc-sarah__text ${showText ? 'cc-sarah__text--visible' : ''}`}>
             {getMessage()}

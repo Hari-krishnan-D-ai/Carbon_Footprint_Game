@@ -283,3 +283,87 @@
   text-overflow: ellipsis;
   flex: 1;
 }
+
+/* ===== RESPONSIVENESS AND DEVICE COMPATIBILITY ===== */
+
+@media (max-width: 1024px) {
+  /* Shift deeds log and impact banner down when widgets wrap */
+  .cc-coc-deeds {
+    top: 155px;
+    width: 220px;
+  }
+  .cc-coc-impact {
+    top: 150px;
+  }
+}
+
+@media (max-width: 820px) {
+  .cc-widgets-row {
+    gap: 10px 16px;
+    justify-content: center;
+  }
+  .cc-widget {
+    min-width: 170px;
+    height: 48px;
+    border-width: 2px;
+  }
+  .cc-widget--trees,
+  .cc-widget--status {
+    min-width: 140px;
+  }
+  .cc-widget__icon-frame {
+    width: 40px;
+    height: 40px;
+    left: -12px;
+    border-width: 2px;
+  }
+  .cc-widget__icon {
+    font-size: 18px;
+  }
+  .cc-widget__content {
+    padding-left: 32px;
+    padding-right: 8px;
+  }
+  .cc-widget__label {
+    font-size: 8px;
+  }
+  .cc-widget__value {
+    font-size: 11px;
+  }
+  .cc-widget__value.font-large {
+    font-size: 13px;
+    margin-top: 2px;
+  }
+  .cc-widget__status-text {
+    font-size: 11px;
+  }
+  .cc-coc-deeds {
+    top: 150px;
+    width: 200px;
+  }
+  .cc-coc-impact {
+    top: 145px;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Grid structure on mobile screens for compact layout */
+  .cc-widgets-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 12px;
+    top: 10px;
+    left: 12px;
+    right: 12px;
+  }
+  .cc-widget {
+    width: 100%;
+    min-width: 0 !important;
+  }
+  .cc-coc-deeds {
+    display: none; /* Hide log of deeds on narrow viewports to avoid blocking the 3D scene */
+  }
+  .cc-coc-impact {
+    top: 125px;
+  }
+}
