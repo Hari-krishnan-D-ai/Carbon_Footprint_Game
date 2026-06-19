@@ -115,8 +115,3 @@ export const useGameStore = create((set, get) => ({
       npcAlertQueue: state.npcAlertQueue.filter((alert) => alert.id !== id),
     })),
 }));
-
-if (typeof window !== 'undefined') {
-  window.useGameStore = useGameStore;
-}
-
